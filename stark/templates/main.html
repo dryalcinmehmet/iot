@@ -1,0 +1,531 @@
+
+
+{% extends 'base.html' %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Welcome Home {% endblock %}</title>
+
+
+</head>
+
+
+<body >
+
+{% block g1 %}
+
+<div id="g1" style="height: 300px; width: 95%; margin: 0px 0px 0px 30px;"></div>
+<script>
+
+var arr = [];
+    {% for i in  cd.voltaj %}
+
+    arr.push( {{i}} );
+
+    {% endfor %}
+
+
+    data = arr;
+
+
+Highcharts.chart('g1', {
+
+    chart: {
+        zoomType: 'x'
+    },
+
+    boost: {
+        useGPUTranslations: true
+    },
+
+    title: {
+        text: 'Voltaj'
+    },
+
+    subtitle: {
+        text: 'Anlik Değerler'
+    },
+
+    tooltip: {
+        valueDecimals: 2
+    },
+
+
+    series: [{
+        color: "#f442e5",
+        data: data,
+        lineWidth: 0.5
+    }]
+
+});
+
+</script>
+{% endblock %}
+
+{% block g2 %}
+
+<div id="g2" style="height: 300px; width: 95%; margin: 0px 0px 0px 0px;"></div>
+<script>
+
+var arr = [];
+    {% for i in  cd.akim %}
+
+    arr.push( {{i}} );
+
+    {% endfor %}
+
+
+    data = arr;
+
+
+Highcharts.chart('g2', {
+
+    chart: {
+        zoomType: 'x'
+    },
+
+    boost: {
+        useGPUTranslations: true
+    },
+
+    title: {
+        text: 'Akim',
+
+
+    },
+
+    subtitle: {
+        text: 'Anlik Değerler',
+
+    },
+
+    tooltip: {
+        valueDecimals: 2
+    },
+
+    series: [{
+        color: "#41f4e8",
+        data: data,
+        lineWidth: 0.5
+    }]
+
+});
+
+</script>
+{% endblock %}
+
+
+{% block g3 %}
+
+<div id="g3" style="height: 300px; width: 95%; margin: 0px 0px 0px 30px;"></div>
+<script>
+
+var arr = [];
+    {% for i in  cd.aktif %}
+
+    arr.push( {{i}} );
+
+    {% endfor %}
+
+
+    data = arr;
+
+Highcharts.chart('g3', {
+    chart: {
+        type: 'area'
+    },
+    title: {
+        text: 'Aktif Güç',
+        fontSize: 500
+    },
+    subtitle: {
+        text: 'kW'
+    },
+    xAxis: {
+        allowDecimals: false,
+        labels: {
+            formatter: function () {
+                return this.value; // clean, unformatted number for year
+            }
+        }
+    },
+    yAxis: {
+        title: {
+            text: 'kW'
+        },
+        labels: {
+            formatter: function () {
+                return this.value / 1000 + 'k';
+            }
+        }
+    },
+    tooltip: {
+        pointFormat: '{series.name} produced <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
+    },
+    plotOptions: {
+        area: {
+            pointStart: 1940,
+            marker: {
+                enabled: false,
+                symbol: 'circle',
+                radius: 2,
+                states: {
+                    hover: {
+                        enabled: true
+                    }
+                }
+            }
+        }
+    },
+    series: [{
+        color: "#f442e5",
+        name: 'USA',
+        data: data
+    },]
+});
+</script>
+{% endblock %}
+
+{% block g4 %}
+
+<div id="g4" style="height: 300px; width: 95%; margin: 0px 0px 0px 0px;"></div>
+<script>
+
+var arr = [];
+    {% for i in  cd.reaktif %}
+
+    arr.push( {{i}} );
+
+    {% endfor %}
+
+
+    data = arr;
+
+Highcharts.chart('g4', {
+    chart: {
+        type: 'area'
+    },
+    title: {
+        text: 'Reaktif Güç'
+    },
+    subtitle: {
+        text: 'Var'
+    },
+    xAxis: {
+        allowDecimals: false,
+        labels: {
+            formatter: function () {
+                return this.value; // clean, unformatted number for year
+            }
+        }
+    },
+    yAxis: {
+        title: {
+            text: 'kw'
+        },
+        labels: {
+            formatter: function () {
+                return this.value / 1000 + 'k';
+            }
+        }
+    },
+    tooltip: {
+        pointFormat: '{series.name} produced <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
+    },
+    plotOptions: {
+        area: {
+            pointStart: 1940,
+            marker: {
+                enabled: false,
+                symbol: 'circle',
+                radius: 2,
+                states: {
+                    hover: {
+                        enabled: true
+                    }
+                }
+            }
+        }
+    },
+    series: [ {
+        color: "#41f4e8",
+        name: 'USSR/Russia',
+        data: data
+    }]
+});
+</script>
+{% endblock %}
+
+
+
+{% block g5 %}
+
+<div id="g5" style="height: 300px; width: 95%; margin: 0px 0px 0px 30px;"></div>
+<script>
+
+var arr = [];
+    {% for i in  cd.reaktif %}
+
+    arr.push( {{i}} );
+
+    {% endfor %}
+
+
+    data = arr;
+
+
+
+var gaugeOptions = {
+
+    chart: {
+        type: 'solidgauge'
+    },
+
+    title: 'Sicaklık',
+
+    pane: {
+        center: ['50%', '85%'],
+        size: '140%',
+        startAngle: -90,
+        endAngle: 90,
+        background: {
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
+            innerRadius: '60%',
+            outerRadius: '100%',
+            shape: 'arc'
+        }
+    },
+
+    tooltip: {
+        enabled: false
+    },
+
+    // the value axis
+    yAxis: {
+        stops: [
+            [0.1, '#55BF3B'], // green
+            [0.5, '#DDDF0D'], // yellow
+            [0.9, '#DF5353'] // red
+        ],
+        lineWidth: 0,
+        minorTickInterval: null,
+        tickAmount: 2,
+        title: {
+            y: -70
+        },
+        labels: {
+            y: 16
+        }
+    },
+
+    plotOptions: {
+        solidgauge: {
+            dataLabels: {
+                y: 5,
+                borderWidth: 0,
+                useHTML: true
+            }
+        }
+    }
+};
+
+// The speed gauge
+var chartSpeed = Highcharts.chart('g5', Highcharts.merge(gaugeOptions, {
+    yAxis: {
+        min: 0,
+        max: 100,
+        title: {
+            text: 'Sıcaklık'
+        }
+    },
+
+    credits: {
+        enabled: false
+    },
+
+    series: [{
+        name: 'Speed',
+        data: [80],
+        dataLabels: {
+            format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+                ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
+                   '<span style="font-size:12px;color:silver">derece</span></div>'
+        },
+        tooltip: {
+            valueSuffix: ' C'
+        }
+    }]
+
+}));
+
+
+
+// Bring life to the dials
+setInterval(function () {
+    // Speed
+    var point,
+        newVal,
+        inc;
+
+    if (chartSpeed) {
+        point = chartSpeed.series[0].points[0];
+        inc = Math.round((Math.random() - 0.5) * 100);
+        newVal = point.y + inc;
+
+        if (newVal < 0 || newVal > 200) {
+            newVal = point.y - inc;
+        }
+
+        point.update(newVal);
+    }
+
+
+}, 2000);
+
+</script>
+{% endblock %}
+
+
+
+{% block g6 %}
+
+<div id="g6" style="height: 300px; width: 95%; margin: 0px 0px 0px 0px;"></div>
+<script>
+
+var arr = [];
+    {% for i in  cd.reaktif %}
+
+    arr.push( {{i}} );
+
+    {% endfor %}
+
+
+    data = arr;
+
+
+
+var gaugeOptions = {
+
+    chart: {
+        type: 'solidgauge'
+    },
+
+    title: null,
+
+    pane: {
+        center: ['50%', '85%'],
+        size: '140%',
+        startAngle: -90,
+        endAngle: 90,
+        background: {
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
+            innerRadius: '60%',
+            outerRadius: '100%',
+            shape: 'arc'
+        }
+    },
+
+    tooltip: {
+        enabled: false
+    },
+
+    // the value axis
+    yAxis: {
+        stops: [
+            [0.1, '#55BF3B'], // green
+            [0.5, '#DDDF0D'], // yellow
+            [0.9, '#DF5353'] // red
+        ],
+        lineWidth: 0,
+        minorTickInterval: null,
+        tickAmount: 2,
+        title: {
+            y: -70
+        },
+        labels: {
+            y: 16
+        }
+    },
+
+    plotOptions: {
+        solidgauge: {
+            dataLabels: {
+                y: 5,
+                borderWidth: 0,
+                useHTML: true
+            }
+        }
+    }
+};
+
+// The speed gauge
+var chartSpeed = Highcharts.chart('g6', Highcharts.merge(gaugeOptions, {
+    yAxis: {
+        min: 0,
+        max: 160,
+        title: {
+            text: 'Faz Açısı'
+        }
+    },
+
+    credits: {
+        enabled: false
+    },
+
+    series: [{
+        name: 'Dereces',
+        data: [80],
+        dataLabels: {
+            format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+                ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
+                   '<span style="font-size:12px;color:silver">derece</span></div>'
+        },
+        tooltip: {
+            valueSuffix: 'Derece'
+        }
+    }]
+
+}));
+
+
+
+// Bring life to the dials
+setInterval(function () {
+    // Speed
+    var point,
+        newVal,
+        inc;
+
+    if (chartSpeed) {
+        point = chartSpeed.series[0].points[0];
+        inc = Math.round((Math.random() - 0.5) );
+        newVal = point.y + inc;
+
+        if (newVal < 0 || newVal > 90) {
+            newVal = point.y - inc;
+        }
+
+        point.update(newVal);
+    }
+
+
+}, 2000);
+
+
+
+</script>
+{% endblock %}
+
+
+
+{% block copyright %}
+ <div class="copyright" >
+   "IoT Yönetim Sistemi V.1.1"
+ </div>
+{% endblock %}
+
+</body>
+</html>

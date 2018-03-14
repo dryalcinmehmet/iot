@@ -1,0 +1,71 @@
+
+
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}About Us {% endblock %}</title>
+
+
+
+
+</head>
+<body>
+
+
+
+
+
+{% block veriler %}
+
+<div id="veriler" style="height: 300px; width: 95%; margin: 0px 0px 0px 30px;"></div>
+<script>
+
+var arr = [];
+    {% for i in  pycom.voltaj %}
+
+    arr.push( {{i}} );
+
+    {% endfor %}
+
+
+    data = arr;
+
+
+Highcharts.chart('veriler', {
+
+    chart: {
+        zoomType: 'x'
+    },
+
+    boost: {
+        useGPUTranslations: true
+    },
+
+    title: {
+        text: 'Voltaj'
+    },
+
+    subtitle: {
+        text: 'Anlik Değerler'
+    },
+
+    tooltip: {
+        valueDecimals: 2
+    },
+
+
+    series: [{
+        color: "#f442e5",
+        data: data,
+        lineWidth: 0.5
+    }]
+
+});
+
+</script>
+{% endblock %}
+
+</body>
+</html>
